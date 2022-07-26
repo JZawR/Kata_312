@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     private int age;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JoinTable(name = "users_roles",
 //            joinColumns = @JoinColumn(name = "user_id"),
 //            inverseJoinColumns = @JoinColumn(name = "role_id"))

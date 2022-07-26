@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,9 +35,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void addUser(User newUser) {
-        System.out.println(newUser.getRoles());
         if (newUser.getRoles() == null) {
-            newUser.setRoles(roleDao.getAllRoles().stream().limit(1).collect(Collectors.toSet()));
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(new Role("USER"));
+            newUser.setRoles(roleSet);
         }
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         userDao.addUser(newUser);
@@ -47,6 +46,9 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void updateUser(User updatedUser) {
+        if(!updatedUser.getPassword().equals(userDao.getUserById(updatedUser.getId()).getPassword())) {
+            updatedUser.setPassword(bCryptPasswordEncoder.encode(updatedUser.getPassword()));
+        }
         userDao.updateUser(updatedUser);
     }
 
