@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>User</title>
-</head>
-<body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<p th:text="${man.getName()}">VALUE</p>
-<p th:text="${man.getSurname()}">VALUE</p>
-<p th:text="${man.getAge()}">VALUE</p>
-<p th:text="${man.getRoles()}">VALUE</p>
-
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="LOGOUT"/>
-</form>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>User</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p th:text="${man.getName()}">VALUE</p>
+        <p th:text="${man.getSurname()}">VALUE</p>
+        <p th:text="${man.getAge()}">VALUE</p>
+        <p th:text="${man.getRoles()}">VALUE</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="LOGOUT"/>
+        </form>
+    </body>
 </html>

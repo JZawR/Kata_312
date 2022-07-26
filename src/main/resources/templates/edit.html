@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit</title>
-</head>
-<body>
-
-<form th:method="PATCH" th:action="@{/{id}(id=${userUpdate.getId()})}" th:object="${userUpdate}">
-    <label for="name">name</label>
-    <br/>
-    <input type="text" th:field="*{name}" id="name"/>
-    <br/>
-    <label for="surname">surname</label>
-    <br/>
-    <input type="text" th:field="*{surname}" id="surname">
-    <br/>
-    <label for="age">age</label>
-    <br/>
-    <input type="text" th:field="*{age}" id="age">
-    <br/>
-    <label for="login">Enter login: </label>
-    <br/>
-    <input type="text" th:field="*{login}" id="login"/>
-    <br/>
-    <label for="password">Enter password: </label>
-    <br/>
-    <input type="text" th:field="*{password}" id="password"/>
-    <br/>
-    <br/>
-    <select th:field="*{roles}" multiple="true">
-        <option th:each="r : ${userRoles}" th:value="${r.id}" th:text="${r.id+' '+r.role}">
-        </option>
-    </select>
-    <br/>
-    <br/>
-    <input type="submit" value="UPDATE">
-    <br/>
-    <br>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="LOGOUT"/>
-    </form>
-</form>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit</title>
+    </head>
+    <body>
+        <form th:method="PATCH" th:action="@{/{id}(id=${userUpdate.getId()})}" th:object="${userUpdate}">
+            <label for="name">name</label>
+            <br/>
+            <input type="text" th:field="*{name}" id="name"/>
+            <br/>
+            <label for="surname">surname</label>
+            <br/>
+            <input type="text" th:field="*{surname}" id="surname">
+            <br/>
+            <label for="age">age</label>
+            <br/>
+            <input type="text" th:field="*{age}" id="age">
+            <br/>
+            <label for="login">Enter login: </label>
+            <br/>
+            <input type="text" th:field="*{login}" id="login"/>
+            <br/>
+            <label for="password">Enter password: </label>
+            <br/>
+            <input type="text" th:field="*{password}" id="password"/>
+            <br/>
+            <br/>
+<!--            <select th:field="*{roles}" multiple="true" size="2">-->
+<!--                <option th:each="r : ${userRoles}" th:value="${r.id}" th:text="${r.id+' '+r.role}">-->
+<!--                </option>-->
+<!--            </select>-->
+            <br>
+            <br>
+            <input type="submit" value="UPDATE">
+            <br>
+            <br>
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="LOGOUT"/>
+        </form>
+    </body>
 </html>
