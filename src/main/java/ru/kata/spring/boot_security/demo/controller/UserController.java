@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.security.Principal;
@@ -11,10 +12,11 @@ import java.security.Principal;
 @Controller
 @RequestMapping
 public class UserController {
-
+    private final RoleService roleService;
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(RoleService roleService, UserService userService) {
+        this.roleService = roleService;
         this.userService = userService;
     }
 
@@ -60,7 +62,7 @@ public class UserController {
 
     @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
-        user.setRoles(userService.getUserById(user.getId()).getRoles());
+        user.setRoles(roleService.getRolesByUserId(user.getId()));
         userService.updateUser(user);
         return "redirect:admin/users";
     }

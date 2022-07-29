@@ -8,32 +8,21 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class RoleDaoImpl implements RoleDao{
+public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void addRole(Role role) {
+    public void add(Role role) {
         entityManager.persist(role);
-    }
-
-    public void updateRole(Role updatedRole, Long id) {
-        entityManager.merge(updatedRole);
-    }
-
-    public void deleteRole(Long id) {
-        entityManager.remove(id);
-    }
-
-    public Role getRoleById(Long id) {
-        return entityManager.find(Role.class, id);
-    }
-
-    public Role getRoleByName(String name) {
-        return entityManager.find(Role.class, name);
     }
 
     public List<Role> getAllRoles() {
         return entityManager.createQuery("From Role", Role.class).getResultList();
+    }
+
+    public List<Role> getRolesByUserId(Long id) {
+        return entityManager.createQuery("SELECT r from Role r join r.users u where u.id = :id",
+                Role.class).setParameter("id", id).getResultList();
     }
 }

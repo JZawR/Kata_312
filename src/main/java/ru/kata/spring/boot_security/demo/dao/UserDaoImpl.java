@@ -29,12 +29,12 @@ public class UserDaoImpl implements UserDao {
         return entityManager.find(User.class, id);
     }
 
-    public User getUserByName(String name) {
-        return entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.roles roles where u.login = :name ",
-                User.class).setParameter("name", name).getSingleResult();
+    public User getUserByNameWithRoles(String login) {
+        return entityManager.createQuery("SELECT u FROM User u JOIN FETCH u.roles roles where u.login = :login ",
+                User.class).setParameter("login", login).getSingleResult();
     }
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsersWithRoles() {
         return entityManager.createQuery("From User", User.class).getResultList();
     }
 }
