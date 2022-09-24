@@ -9,12 +9,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ru.kata.spring.boot_security.demo.handler.SuccessUserHandler;
 
 @Configuration
 @EnableWebSecurity
-@EnableTransactionManagement
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final UserDetailsService userDetailsService;

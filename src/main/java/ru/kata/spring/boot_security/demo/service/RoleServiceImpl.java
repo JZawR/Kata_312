@@ -17,7 +17,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     public void add(Role role) {
-        roleDao.add(role);
+        roleDao.addRole(role);
     }
 
     public Set<Role> getRoles() {

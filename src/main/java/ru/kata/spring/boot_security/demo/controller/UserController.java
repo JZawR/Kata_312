@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUserPage(@ModelAttribute("userBoy") User user) {
+    public String showNewUserPage(@ModelAttribute("userBoy") User user) {
         return "new";
     }
 
@@ -55,21 +55,21 @@ public class UserController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editeUserPage(@PathVariable Long id, Model userModel) {
+    public String showUpdateUserPage(@PathVariable Long id, Model userModel) {
         userModel.addAttribute("userUpdate", userService.getUserById(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user) {
-        user.setRoles(roleService.getRolesByUserId(user.getId()));
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User user) {
+        user.setRoles(roleService.getRolesByUserId(id));
         userService.updateUser(user);
         return "redirect:admin/users";
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+        userService.deleteUserById(id);
         return "redirect:admin/users";
     }
 }

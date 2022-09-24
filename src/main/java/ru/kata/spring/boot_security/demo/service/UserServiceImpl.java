@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
+    public void deleteUserById(Long id) {
         userDao.deleteUser(id);
     }
 

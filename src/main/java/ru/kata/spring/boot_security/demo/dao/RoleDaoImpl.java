@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.dao;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 
@@ -11,10 +12,10 @@ import java.util.List;
 public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private Session entityManager;
 
-    public void add(Role role) {
-        entityManager.persist(role);
+    public void addRole(Role role) {
+        entityManager.saveOrUpdate(role);
     }
 
     public List<Role> getAllRoles() {
